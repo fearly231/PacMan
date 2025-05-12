@@ -3,20 +3,20 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
-
-YellowGuy::YellowGuy(int startX, int startY, sf::Texture& texture): sprite(texture)
+#include "Character.h"
+YellowGuy::YellowGuy(int startX, int startY, sf::Texture& texture): Character(startX, startY, 100.f)  
 {
     gridPos = { startX, startY };
     currentDir = { 0, 0 };
     nextDir = { 0, 0 };
 
     pixelPos = sf::Vector2f( gridPos.x * Board::TILE_SIZE + Board::TILE_SIZE / 2, gridPos.y * Board::TILE_SIZE + Board::TILE_SIZE / 2 );
-   // sprite = sf::Sprite(texture);
+    sprite = sf::Sprite(texture);
     sprite.setTextureRect(sf::IntRect({ 32, 0 }, {frameSize, frameSize}));
     sprite.setOrigin(sf::Vector2f(static_cast<float>(frameSize) / 2.f, static_cast<float>(frameSize) /2.f));
     sprite.setPosition(pixelPos);
 	sprite.setScale(sf::Vector2f(0.7f, 0.7f));
-    std::cout << "PixelPos: " << pixelPos.x << ", " << pixelPos.y << std::endl;
+   // std::cout << "PixelPos: " << pixelPos.x << ", " << pixelPos.y << std::endl;
 }
 
 void YellowGuy::handleInput() {
@@ -53,6 +53,11 @@ void YellowGuy::collectPoint(Board& board)  {
 			std::cout << counter << std::endl;
            
 		}
+        if (board.isCherry(gridPos.x, gridPos.y) == true) {
+            board.activateCherry(7.f); // np. 7 sekund strachu
+            
+        }
+        
 };
 
 void YellowGuy::update(Board& board, float deltaTime) {
@@ -75,7 +80,7 @@ void YellowGuy::update(Board& board, float deltaTime) {
         pixelPos = targetPos; // snap to grid
         if (canMove(board, nextDir)) {
             currentDir = nextDir;
-			std::cout << "CurrentDir: " << currentDir.x << ", " << currentDir.y << std::endl;
+			//std::cout << "CurrentDir: " << currentDir.x << ", " << currentDir.y << std::endl;
             // Ustawianie rotacji po wejœciu na now¹ œcie¿kê
            
             if (currentDir == sf::Vector2i(0, -1)) {
@@ -95,7 +100,7 @@ void YellowGuy::update(Board& board, float deltaTime) {
 
         if (canMove(board, currentDir)) {
             gridPos += currentDir;
-			std::cout << "GridPos: " << gridPos.x << ", " << gridPos.y << std::endl;
+			//std::cout << "GridPos: " << gridPos.x << ", " << gridPos.y << std::endl;
            
         }
         else if (!canMove(board, currentDir)) {
@@ -108,6 +113,7 @@ void YellowGuy::update(Board& board, float deltaTime) {
     pixelPos += movement;
     sprite.setPosition(pixelPos);
     collectPoint(board);
+   // board.isCherry(board)
     updateAnimation(deltaTime);
 }
 
@@ -123,6 +129,6 @@ void YellowGuy::updateAnimation(float deltaTime) {
 void YellowGuy::draw(sf::RenderWindow& window) {
     //window.draw(sprite);
     sprite.setPosition(pixelPos);
-    
+    //std::cout << "position: " << sprite.getPosition().x << ", " << sprite.getPosition().y << std::endl;
     window.draw(sprite);
 }

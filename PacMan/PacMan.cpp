@@ -1,6 +1,8 @@
 ﻿#include <SFML/Graphics.hpp>
 #include "Board.h"
 #include "YellowGuy.h"
+#include "Character.h"
+#include "RedGhost.h"
 #include <iostream>
 #include <exception>
 
@@ -23,7 +25,21 @@ int main() {
         std::cerr << "could not load texture!"; // Handle error
         return -1;
     }
-    YellowGuy pacman(1, 1, pacManTexture);
+    sf::Texture redGhostTexture;
+    if (!redGhostTexture.loadFromFile("redghost.png"))
+    {
+        std::cerr << "could not load texture!"; // Handle error
+        return -1;
+    }
+    sf::Texture fearedTexture;
+    if (!fearedTexture.loadFromFile("feared.png"))
+    {
+        std::cerr << "could not load texture!"; // Handle error
+        return -1;
+    }
+   YellowGuy pacman(1, 1, pacManTexture);
+   RedGhost redGhost(13, 13, redGhostTexture, fearedTexture);
+
    
     while (window.isOpen())
 
@@ -38,14 +54,16 @@ int main() {
         float deltaTime = clock.restart().asSeconds();
         pacman.handleInput();
         pacman.update(board, deltaTime);
-        
+        redGhost.update(board, deltaTime, pacman.getGridPosition());
+        board.updateCherry(deltaTime);
+
         if (pacman.counter == totalPoint)
 		{
 			std::cout << "You win!" << std::endl;
 			window.close();
             sf::RenderWindow winnerScreen(sf::VideoMode({ 800, 600 }), "You Win!", sf::Style::Close | sf::Style::Titlebar);
             while (winnerScreen.isOpen()) {
-                double score = (double)pacman.counter / deltaTime;
+                int score = pacman.counter / deltaTime;
                 sf::Font font("arial.ttf");
                 sf::Text message(font);
                 message.setString("You win!\n Your score is: "  + std::to_string(score) );
@@ -70,8 +88,8 @@ int main() {
 		}
         window.clear();
         board.draw(window);
+        redGhost.draw(window);
         pacman.draw(window);
-
         window.display();
 
 	

@@ -1,5 +1,94 @@
-﻿  PacMan.cpp
+﻿  Board.cpp
 E:\Studia\biblioteki\SFML-3.0.0\include\SFML\System\Exception.hpp(41,47): warning C4275: interfejs niebędący interfejsem dll class "std::runtime_error"użyto jako podstawowego dla interfejsu biblioteki dll class "sf::Exception"
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\stdexcept(101,19): message : zobacz deklarację „std::runtime_error”
 E:\Studia\biblioteki\SFML-3.0.0\include\SFML\System\Exception.hpp(41,23): message : zobacz deklarację „sf::Exception”
+E:\Studia\PK\PacMan\PacMan\Board.cpp(63,69): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\Board.cpp(63,54): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\Board.cpp(67,96): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\Board.cpp(67,65): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\Board.cpp(71,63): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\Board.cpp(71,48): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\Board.cpp(75,70): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\Board.cpp(75,55): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\Board.cpp(79,70): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\Board.cpp(79,55): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+  PacMan.cpp
+E:\Studia\biblioteki\SFML-3.0.0\include\SFML\System\Exception.hpp(41,47): warning C4275: interfejs niebędący interfejsem dll class "std::runtime_error"użyto jako podstawowego dla interfejsu biblioteki dll class "sf::Exception"
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\stdexcept(101,19): message : zobacz deklarację „std::runtime_error”
+E:\Studia\biblioteki\SFML-3.0.0\include\SFML\System\Exception.hpp(41,23): message : zobacz deklarację „sf::Exception”
+  YellowGuy.cpp
+E:\Studia\biblioteki\SFML-3.0.0\include\SFML\System\Exception.hpp(41,47): warning C4275: interfejs niebędący interfejsem dll class "std::runtime_error"użyto jako podstawowego dla interfejsu biblioteki dll class "sf::Exception"
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\stdexcept(101,19): message : zobacz deklarację „std::runtime_error”
+E:\Studia\biblioteki\SFML-3.0.0\include\SFML\System\Exception.hpp(41,23): message : zobacz deklarację „sf::Exception”
+E:\Studia\PK\PacMan\PacMan\YellowGuy.cpp(13,112): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\YellowGuy.cpp(13,59): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\YellowGuy.cpp(62,125): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\YellowGuy.cpp(62,72): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\YellowGuy.cpp(67,54): warning C4244: "=": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\YellowGuy.cpp(71,54): warning C4244: "=": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+  Generowanie kodu...
   PacMan.vcxproj -> E:\Studia\PK\PacMan\x64\Debug\PacMan.exe

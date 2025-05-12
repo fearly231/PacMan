@@ -1,20 +1,18 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Board.h"
-
-class YellowGuy {
+#include "Character.h"
+class YellowGuy : public Character {
 public:
     YellowGuy(int startX, int startY, sf::Texture& texture);
     int counter = 0;
     void handleInput();                // Odczyt klawiatury
     void update(Board& board, float deltaTime);   // Ruch z uwzglêdnieniem œcian
-    void draw(sf::RenderWindow& window);
-    void collectPoint(Board& board) ;
+    void draw(sf::RenderWindow& window) override;
+    void collectPoint(Board& board);
 
 private:
-    sf::Vector2i gridPos;
-    sf::Vector2i currentDir;
-    sf::Vector2i nextDir;
+   
     sf::Vector2f pixelPos;
     sf::CircleShape shape;
     float speed = 100.0f; // piksele na sekundê
@@ -28,7 +26,5 @@ private:
     float animationTimer = 0.0f;
     float animationDelay = 0.1f;
     int currentFrame = 0;
-
-    sf::Sprite sprite;
 
 };

@@ -12,10 +12,15 @@ public:
     void draw(sf::RenderWindow& window);
     bool isWall(int x, int y) const;
 	bool isPoint(int x, int y);
+    bool isCherry(int x, int y);
     int countTotalPoints();
+    void activateCherry(float duration); // aktywuje wisienkê
+    void updateCherry(float deltaTime);  // odlicza czas
+    bool isCherryActive() const;
 
 private:
     std::vector<std::vector<int>> level;
     sf::RectangleShape wallShape;
-
+    bool cherryActive = false; // pocz¹tkowo nieaktywna
+    float cherryTimer = 0.f;
 };
