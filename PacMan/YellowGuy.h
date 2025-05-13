@@ -5,12 +5,14 @@
 class YellowGuy : public Character {
 public:
     YellowGuy(int startX, int startY, sf::Texture& texture);
-    int counter = 0;
     void handleInput();                // Odczyt klawiatury
     void update(Board& board, float deltaTime);   // Ruch z uwzglêdnieniem œcian
     void draw(sf::RenderWindow& window) override;
     void collectPoint(Board& board);
-
+    int getCounter() {
+        return counter;
+    }
+    int counter = 0;
 private:
    
     sf::Vector2f pixelPos;

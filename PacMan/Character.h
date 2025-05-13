@@ -17,5 +17,6 @@ class Character
         sf::Vector2i nextDir;
         sf::Sprite sprite;
         float speed;
+
 };
 

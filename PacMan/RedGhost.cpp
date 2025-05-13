@@ -39,8 +39,22 @@ void RedGhost::update(Board& board, float deltaTime, const sf::Vector2i& pacmanP
         if (pacmanPos == gridPos and isFeared(board) == false) {
             std::cout << "KONIEC GRY, PRZEGRALES";
         }
+        
     }
+    if (pacmanPos == gridPos && isFeared(board)) {
+        std::cout << "Zjad³eœ RedGhosta\n";
+        //counter = counter + 100;
+        gridPos.x = Board::WIDTH / 2;
+        gridPos.y = Board::HEIGHT / 2;
 
+        pixelPos = sf::Vector2f(
+            gridPos.x * Board::TILE_SIZE + Board::TILE_SIZE / 2,
+            gridPos.y * Board::TILE_SIZE + Board::TILE_SIZE / 2
+        );
+
+        sprite.setPosition(pixelPos);
+        currentDir = { 0, 0 };
+    }
     sf::Vector2f movement(currentDir.x * speed * deltaTime, currentDir.y * speed * deltaTime);
     pixelPos += movement;
     sprite.setPosition(pixelPos);
@@ -62,6 +76,7 @@ std::vector<sf::Vector2i> RedGhost::getPathTo(Board& board, sf::Vector2i start, 
 
     // Tryb "FEARED" – wybieramy ruch najdalej od Pacmana
     if (isFeared(board)) {
+        speed = 50.f;
         std::cout << "boi siê\n";
         sprite = sf::Sprite(fearedTexture);
         sprite.setTextureRect(sf::IntRect({ 0, 0 }, { frameSize, frameHeight }));
@@ -92,6 +107,7 @@ std::vector<sf::Vector2i> RedGhost::getPathTo(Board& board, sf::Vector2i start, 
 
     // Tryb "CHASE" – BFS do Pacmana
     std::cout << "nie boi siê\n";
+    speed = 80.f;
     sprite = sf::Sprite(normalTexture);
     sprite.setTextureRect(sf::IntRect({ 0, 0 }, { frameSize, frameHeight }));
     sprite.setOrigin(sf::Vector2f(static_cast<float>(frameSize) / 2.f, static_cast<float>(frameSize) / 2.f));

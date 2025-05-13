@@ -11,7 +11,7 @@ int main() {
 
   
    
-
+    int counter = 0;
     // Create the window with the specified settings
 
     sf::RenderWindow window(sf::VideoMode({ Board::WIDTH * Board::TILE_SIZE, Board::HEIGHT * Board::TILE_SIZE }), "Pac-Man");
@@ -54,6 +54,7 @@ int main() {
         float deltaTime = clock.restart().asSeconds();
         pacman.handleInput();
         pacman.update(board, deltaTime);
+        //int counter = pacman.getCounter();
         redGhost.update(board, deltaTime, pacman.getGridPosition());
         board.updateCherry(deltaTime);
 

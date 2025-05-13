@@ -32,19 +32,29 @@ E:\Studia\PK\PacMan\PacMan\RedGhost.cpp(27,59): warning C4244: "argument": konwe
           [
               T=float
           ]
-E:\Studia\PK\PacMan\PacMan\RedGhost.cpp(49,55): warning C4244: "=": konwersja z "int" do "T", możliwa utrata danych
+E:\Studia\PK\PacMan\PacMan\RedGhost.cpp(52,42): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
           with
           [
               T=float
           ]
-E:\Studia\PK\PacMan\PacMan\RedGhost.cpp(53,55): warning C4244: "=": konwersja z "int" do "T", możliwa utrata danych
+E:\Studia\PK\PacMan\PacMan\RedGhost.cpp(51,42): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\RedGhost.cpp(63,55): warning C4244: "=": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+E:\Studia\PK\PacMan\PacMan\RedGhost.cpp(67,55): warning C4244: "=": konwersja z "int" do "T", możliwa utrata danych
           with
           [
               T=float
           ]
   Trwa generowanie kodu
-  1 of 669 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+  16 of 669 functions ( 2.4%) were compiled, the rest were copied from previous compilation.
+    3 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Zakończono generowanie kodu
   PacMan.vcxproj -> E:\Studia\PK\PacMan\x64\Release\PacMan.exe

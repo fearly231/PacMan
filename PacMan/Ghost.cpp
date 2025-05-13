@@ -11,6 +11,7 @@ void Ghost::update(Board& board, float deltaTime, const sf::Vector2i& pacmanPos)
 
     if (feared && fearTimer.getElapsedTime().asSeconds() > 5.f) {
         feared = false;
+        
     }
 
  }
