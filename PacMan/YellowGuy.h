@@ -13,6 +13,7 @@ public:
         return counter;
     }
     int counter = 0;
+    sf::Vector2i getDirPosition();
 private:
    
     sf::Vector2f pixelPos;

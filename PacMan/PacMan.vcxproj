@@ -135,17 +135,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BlueGhost.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Ghost.cpp" />
+    <ClCompile Include="OrangeGhost.cpp" />
     <ClCompile Include="PacMan.cpp" />
+    <ClCompile Include="PinkGhost.cpp" />
     <ClCompile Include="RedGhost.cpp" />
     <ClCompile Include="YellowGuy.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BlueGhost.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Ghost.h" />
+    <ClInclude Include="OrangeGhost.h" />
+    <ClInclude Include="PinkGhost.h" />
     <ClInclude Include="RedGhost.h" />
     <ClInclude Include="YellowGuy.h" />
   </ItemGroup>

@@ -3,6 +3,9 @@
 #include "YellowGuy.h"
 #include "Character.h"
 #include "RedGhost.h"
+#include "BlueGhost.h"
+#include "OrangeGhost.h"
+#include "PinkGhost.h"
 #include <iostream>
 #include <exception>
 
@@ -37,12 +40,34 @@ int main() {
         std::cerr << "could not load texture!"; // Handle error
         return -1;
     }
+    sf::Texture blueGhostTexture;
+    if (!blueGhostTexture.loadFromFile("blueghost.png"))
+    {
+        std::cerr << "could not load texture!"; // Handle error
+        return -1;
+    } 
+    sf::Texture orangeGhostTexture;
+    if (!orangeGhostTexture.loadFromFile("orangeghost.png"))
+    {
+        std::cerr << "could not load texture!"; // Handle error
+        return -1;
+    }
+    sf::Texture pinkGhostTexture;
+    if (!pinkGhostTexture.loadFromFile("pinkghost.png"))
+    {
+        std::cerr << "could not load texture!"; // Handle error
+        return -1;
+    }
+
    YellowGuy pacman(1, 1, pacManTexture);
    RedGhost redGhost(13, 13, redGhostTexture, fearedTexture);
-
+   BlueGhost blueGhost(12, 12, blueGhostTexture, fearedTexture);
+   OrangeGhost orangeGhost(11, 11, orangeGhostTexture, fearedTexture);
+   PinkGhost pinkGhost(13, 12, pinkGhostTexture, fearedTexture);
    
+   sf::Vector2i pacmanDir = pacman.getDirPosition();
+   sf::Vector2i blinkyPos = redGhost.getRedGhostPos();
     while (window.isOpen())
-
 
     {
   
@@ -55,7 +80,11 @@ int main() {
         pacman.handleInput();
         pacman.update(board, deltaTime);
         //int counter = pacman.getCounter();
+        sf::Vector2i blinkypos = redGhost.getRedGhostPos();
         redGhost.update(board, deltaTime, pacman.getGridPosition());
+        blueGhost.update(board, deltaTime, pacman.getGridPosition(), pacmanDir, blinkyPos);
+        orangeGhost.update(board, deltaTime, pacman.getGridPosition(), pacmanDir);
+        pinkGhost.update(board, deltaTime, pacman.getGridPosition(), pacmanDir);
         board.updateCherry(deltaTime);
 
         if (pacman.counter == totalPoint)
@@ -90,9 +119,13 @@ int main() {
         window.clear();
         board.draw(window);
         redGhost.draw(window);
+        pinkGhost.draw(window);
+        blueGhost.draw(window);
+        orangeGhost.draw(window);
         pacman.draw(window);
         window.display();
 
 	
     }
+    
 }

@@ -3,12 +3,7 @@
 
 
 
-struct Vec2iLess {
-	bool operator()(const sf::Vector2i& lhs, const sf::Vector2i& rhs) const {
-		if (lhs.y != rhs.y) return lhs.y < rhs.y;
-		return lhs.x < rhs.x;
-	}
-};
+
 class RedGhost : public Ghost {
 public:
 
@@ -18,10 +13,12 @@ public:
 	//void setTarget(sf::Vector2i target);
 	void draw(sf::RenderWindow& window) override;
 	bool isFeared(Board& board) override;
+	sf::Vector2i getRedGhostPos();
 	
 private:
 	sf::Texture& normalTexture;
 	sf::Texture& fearedTexture;
+	
 };
 
 

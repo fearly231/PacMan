@@ -132,3 +132,6 @@ void YellowGuy::draw(sf::RenderWindow& window) {
     //std::cout << "position: " << sprite.getPosition().x << ", " << sprite.getPosition().y << std::endl;
     window.draw(sprite);
 }
+sf::Vector2i YellowGuy::getDirPosition() {
+    return currentDir;
+}
