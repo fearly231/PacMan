@@ -1,4 +1,4 @@
-﻿  OrangeGhost.cpp
+﻿  PacMan.cpp
 E:\Studia\biblioteki\SFML-3.0.0\include\SFML\System\Exception.hpp(41,47): warning C4275: interfejs niebędący interfejsem dll class "std::runtime_error"użyto jako podstawowego dla interfejsu biblioteki dll class "sf::Exception"
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\stdexcept(101,19): message : zobacz deklarację „std::runtime_error”
 E:\Studia\biblioteki\SFML-3.0.0\include\SFML\System\Exception.hpp(41,23): message : zobacz deklarację „sf::Exception”
@@ -12,54 +12,9 @@ E:\Studia\PK\PacMan\PacMan\Ghost.h(24,71): warning C4244: "argument": konwersja 
           [
               T=float
           ]
-E:\Studia\PK\PacMan\PacMan\OrangeGhost.cpp(14,111): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
-          with
-          [
-              T=float
-          ]
-E:\Studia\PK\PacMan\PacMan\OrangeGhost.cpp(14,58): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
-          with
-          [
-              T=float
-          ]
-E:\Studia\PK\PacMan\PacMan\OrangeGhost.cpp(26,38): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
-          with
-          [
-              T=float
-          ]
-E:\Studia\PK\PacMan\PacMan\OrangeGhost.cpp(25,59): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
-          with
-          [
-              T=float
-          ]
-E:\Studia\PK\PacMan\PacMan\OrangeGhost.cpp(48,42): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
-          with
-          [
-              T=float
-          ]
-E:\Studia\PK\PacMan\PacMan\OrangeGhost.cpp(47,62): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
-          with
-          [
-              T=float
-          ]
-E:\Studia\PK\PacMan\PacMan\OrangeGhost.cpp(61,55): warning C4244: "=": konwersja z "int" do "T", możliwa utrata danych
-          with
-          [
-              T=float
-          ]
-E:\Studia\PK\PacMan\PacMan\OrangeGhost.cpp(65,55): warning C4244: "=": konwersja z "int" do "T", możliwa utrata danych
-          with
-          [
-              T=float
-          ]
-E:\Studia\PK\PacMan\PacMan\OrangeGhost.cpp(93,63): warning C4267: "argument": konwersja z "size_t" do "_Ty", możliwa utrata danych
-          with
-          [
-              _Ty=int
-          ]
+E:\Studia\PK\PacMan\PacMan\PacMan.cpp(96,27): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
   Trwa generowanie kodu
-  2 of 722 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    21 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+  All 804 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Zakończono generowanie kodu
   PacMan.vcxproj -> E:\Studia\PK\PacMan\x64\Release\PacMan.exe

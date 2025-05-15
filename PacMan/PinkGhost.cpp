@@ -110,13 +110,23 @@ std::vector<sf::Vector2i> PinkGhost::getPathTo(Board& board, sf::Vector2i start,
     // Pinky stara siê wyprzedziæ Pac-Mana o 4 kratki w kierunku, w którym Pac-Man siê porusza.
     sf::Vector2i predictedPos = pacmanPos + pacmanDir * 4;
 
+
+
+    // Sprawdzenie granic planszy
+    if (predictedPos.x < 0 || predictedPos.y < 0 ||
+        predictedPos.x >= board.WIDTH || predictedPos.y >= board.HEIGHT ||
+        board.isWall(predictedPos.x, predictedPos.y)) {
+        predictedPos = pacmanPos;  // fallback do pacmanPos
+    }
     std::queue<sf::Vector2i> frontier;
     std::map<sf::Vector2i, sf::Vector2i, Vec2iLess> cameFrom;
 
     frontier.push(start);
     cameFrom[start] = start;
 
-    while (!frontier.empty()) {
+    int bfsSteps = 0;
+    const int maxSteps = 1000;
+    while (!frontier.empty() && bfsSteps++ < maxSteps) {
         sf::Vector2i current = frontier.front();
         frontier.pop();
 

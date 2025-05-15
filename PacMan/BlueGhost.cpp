@@ -59,8 +59,9 @@ void BlueGhost::update(Board& board, float deltaTime, const sf::Vector2i& pacman
     }
     else if (gridPos.x >= Board::WIDTH - 1) {
         gridPos.x = 1;
-        pixelPos.x = gridPos.x * Board::TILE_SIZE + 2 + Board::TILE_SIZE / 2;
+        pixelPos.x = gridPos.x * Board::TILE_SIZE + 2 + Board::TILE_SIZE / 2; 
     }
+
 }
 
 std::vector<sf::Vector2i> BlueGhost::getPathTo(Board& board, sf::Vector2i start, sf::Vector2i pacmanPos, sf::Vector2i pacmanDir, sf::Vector2i blinkyPos) {
@@ -105,31 +106,46 @@ std::vector<sf::Vector2i> BlueGhost::getPathTo(Board& board, sf::Vector2i start,
     sprite.setPosition(pixelPos);
 
     // Oblicz cel Inky'ego w zale¿noœci od pozycji Pac-Mana i Blinky'ego
-    sf::Vector2i targetPos = pacmanPos + pacmanDir * 4; // Dwa pola przed Pac-Manem w kierunku, w którym siê porusza
+    sf::Vector2i pacmanAhead = pacmanPos + pacmanDir * 2;
 
-    // Teraz robimy BFS, by znaleŸæ œcie¿kê do tego punktu
-    std::queue<sf::Vector2i> frontier;
+    // Obliczamy wektor od Blinky'ego do punktu przed Pac-Manem
+    sf::Vector2i vector = pacmanAhead - blinkyPos;
+
+    // Podwajamy ten wektor i dodajemy go do pozycji Blinky'ego
+    sf::Vector2i targetPos = blinkyPos + vector * 2;
+
+    // BFS, by znaleŸæ œcie¿kê do tego punktu
+    if (board.isWall(targetPos.x, targetPos.y)) {
+        targetPos = pacmanPos; // fallback: idŸ bezpoœrednio do Pacmana
+    }
+
+    std::queue<std::pair<sf::Vector2i, int>> frontier;
     std::map<sf::Vector2i, sf::Vector2i, Vec2iLess> cameFrom;
 
-    frontier.push(start);
+    frontier.push({ start, 0 });
     cameFrom[start] = start;
 
-    while (!frontier.empty()) {
-        sf::Vector2i current = frontier.front();
+    const int maxDepth = 50;
+
+    int bfsSteps = 0;
+    const int maxSteps = 1000;
+    while (!frontier.empty() && bfsSteps++ < maxSteps) {
+        auto [current, depth] = frontier.front();
         frontier.pop();
 
+        if (depth > maxDepth) break;
         if (current == targetPos) break;
 
         for (const auto& dir : directions) {
             sf::Vector2i next = current + dir;
-
             if (!board.isWall(next.x, next.y) && cameFrom.find(next) == cameFrom.end()) {
-                frontier.push(next);
+                frontier.push({ next, depth + 1 });
                 cameFrom[next] = current;
             }
         }
     }
 
+    // Odtwórz œcie¿kê
     std::vector<sf::Vector2i> path;
     if (cameFrom.find(targetPos) == cameFrom.end()) return path;
 
@@ -140,6 +156,7 @@ std::vector<sf::Vector2i> BlueGhost::getPathTo(Board& board, sf::Vector2i start,
     std::reverse(path.begin(), path.end());
     return path;
 }
+
 
 void BlueGhost::draw(sf::RenderWindow& window) {
     sprite.setPosition(pixelPos);

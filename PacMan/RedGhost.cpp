@@ -43,7 +43,7 @@ void RedGhost::update(Board& board, float deltaTime, const sf::Vector2i& pacmanP
         
     }
     if (pacmanPos == gridPos && isFeared(board)) {
-        std::cout << "Zjad³eœ RedGhosta\n";
+       // std::cout << "Zjad³eœ RedGhosta\n";
         //counter = counter + 100;
         gridPos.x = Board::WIDTH / 2;
         gridPos.y = Board::HEIGHT / 2;
@@ -75,7 +75,7 @@ std::vector<sf::Vector2i> RedGhost::getPathTo(Board& board, sf::Vector2i start, 
         {1, 0}, {-1, 0}, {0, 1}, {0, -1}
     };
 
-    // Tryb "FEARED" – wybieramy ruch najdalej od Pacmana
+    // Tryb FEARED
     if (isFeared(board)) {
         speed = 50.f;
         sprite = sf::Sprite(fearedTexture);
@@ -83,7 +83,7 @@ std::vector<sf::Vector2i> RedGhost::getPathTo(Board& board, sf::Vector2i start, 
         sprite.setOrigin(sf::Vector2f(static_cast<float>(frameSize) / 2.f, static_cast<float>(frameHeight) / 2.f));
         sprite.setScale(sf::Vector2f(1.5f, 1.5f));
         sprite.setPosition(pixelPos);
-        // Ucieka w losowym kierunku
+
         std::vector<sf::Vector2i> options;
         for (const auto& dir : directions) {
             sf::Vector2i next = start + dir;
@@ -93,8 +93,6 @@ std::vector<sf::Vector2i> RedGhost::getPathTo(Board& board, sf::Vector2i start, 
         }
 
         if (options.empty()) return {};
-
-        // Losowy wybór kierunku z dostêpnych opcji
         std::random_device rd;
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> dis(0, options.size() - 1);
@@ -103,32 +101,47 @@ std::vector<sf::Vector2i> RedGhost::getPathTo(Board& board, sf::Vector2i start, 
         return { randomDirection };
     }
 
-    // Tryb "CHASE" – BFS do Pacmana
-    std::cout << "nie boi siê\n";
+    // Tryb CHASE
     speed = 80.f;
     sprite = sf::Sprite(normalTexture);
     sprite.setTextureRect(sf::IntRect({ 0, 0 }, { frameSize, frameHeight }));
-    sprite.setOrigin(sf::Vector2f(static_cast<float>(frameSize) / 2.f, static_cast<float>(frameSize) / 2.f));
+    sprite.setOrigin(sf::Vector2f(static_cast<float>(frameSize) / 2.f, static_cast<float>(frameHeight) / 2.f));
     sprite.setScale(sf::Vector2f(1.5f, 1.5f));
     sprite.setPosition(pixelPos);
-    std::queue<sf::Vector2i> frontier;
+
+    // Jeœli goal to œciana, przesuñ go w stronê startu
+    if (board.isWall(goal.x, goal.y)) {
+        for (const auto& dir : directions) {
+            sf::Vector2i adjusted = goal + dir;
+            if (!board.isWall(adjusted.x, adjusted.y)) {
+                goal = adjusted;
+                break;
+            }
+        }
+    }
+
+    std::queue<std::pair<sf::Vector2i, int>> frontier;
     std::map<sf::Vector2i, sf::Vector2i, Vec2iLess> cameFrom;
 
-    frontier.push(start);
+    frontier.push({ start, 0 });
     cameFrom[start] = start;
 
-    while (!frontier.empty()) {
-        sf::Vector2i current = frontier.front();
+    const int maxDepth = 50;
+
+    int bfsSteps = 0;
+    const int maxSteps = 1000;
+    while (!frontier.empty() && bfsSteps++ < maxSteps) {
+        auto [current, depth] = frontier.front();
         frontier.pop();
 
+        if (depth > maxDepth) break;
         if (current == goal) break;
 
         for (const auto& dir : directions) {
             sf::Vector2i next = current + dir;
 
-            // Mo¿esz dodaæ check czy next mieœci siê w granicach planszy
             if (!board.isWall(next.x, next.y) && cameFrom.find(next) == cameFrom.end()) {
-                frontier.push(next);
+                frontier.push({ next, depth + 1 });
                 cameFrom[next] = current;
             }
         }
@@ -144,7 +157,6 @@ std::vector<sf::Vector2i> RedGhost::getPathTo(Board& board, sf::Vector2i start, 
     std::reverse(path.begin(), path.end());
     return path;
 }
-
 void RedGhost::draw(sf::RenderWindow& window) {
     //window.draw(sprite);
     sprite.setPosition(pixelPos);

@@ -14,6 +14,7 @@ public:
 	void draw(sf::RenderWindow& window) override;
 	bool isFeared(Board& board) override;
 	sf::Vector2i getRedGhostPos();
+	~RedGhost() {};
 	
 private:
 	sf::Texture& normalTexture;

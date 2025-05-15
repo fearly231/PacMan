@@ -12,7 +12,7 @@ public:
 	void draw(sf::RenderWindow& window) override;
 	bool isFeared(Board& board) override;
 	//void setRedGhostReference(RedGhost& red);
-
+	~PinkGhost() {};
 
 private:
 	sf::Texture& normalTexture;

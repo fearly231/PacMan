@@ -24,7 +24,6 @@ OrangeGhost::OrangeGhost(int startX, int startY, sf::Texture& normalTexture, sf:
 void OrangeGhost::update(Board& board, float deltaTime, const sf::Vector2i& pacmanPos, const sf::Vector2i& pacmanDir) {
     sf::Vector2f targetPixel(gridPos.x * Board::TILE_SIZE + Board::TILE_SIZE / 2,
         gridPos.y * Board::TILE_SIZE + Board::TILE_SIZE / 2);
-
     if (std::abs(pixelPos.x - targetPixel.x) < 2 && std::abs(pixelPos.y - targetPixel.y) < 2) {
         pixelPos = targetPixel;
 
@@ -40,7 +39,7 @@ void OrangeGhost::update(Board& board, float deltaTime, const sf::Vector2i& pacm
     }
 
     if (pacmanPos == gridPos && isFeared(board)) {
-        std::cout << "Zjad³eœ OrangeGhosta" << std::endl;
+        //std::cout << "Zjad³eœ OrangeGhosta" << std::endl;
         gridPos.x = Board::WIDTH / 2 - 1;
         gridPos.y = Board::HEIGHT / 2 - 1;
 
@@ -116,7 +115,9 @@ std::vector<sf::Vector2i> OrangeGhost::getPathTo(Board& board, sf::Vector2i star
         frontier.push(start);
         cameFrom[start] = start;
 
-        while (!frontier.empty()) {
+        int bfsSteps = 0;
+        const int maxSteps = 1000;
+        while (!frontier.empty() && bfsSteps++ < maxSteps) {
             sf::Vector2i current = frontier.front();
             frontier.pop();
 

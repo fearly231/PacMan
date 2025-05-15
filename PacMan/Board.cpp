@@ -12,19 +12,19 @@ Board::Board() {
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
     {1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1},
     {1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1},
-    {1,0,0,0,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,1,1,1,1,1,0,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,1,1,1},
     {2,2,2,2,2,1,0,1,1,1,1,0,1,1,0,1,1,1,1,0,1,2,2,2,2,2},
-    {2,2,2,2,2,1,0,1,1,3,0,0,0,0,0,0,3,1,1,0,1,2,2,2,2,2,},
+    {2,2,2,2,2,1,0,0,0,3,0,0,0,0,0,0,3,0,0,0,1,2,2,2,2,2,},
     {2,2,2,2,2,1,0,1,1,0,1,1,0,0,1,1,0,1,1,0,1,2,2,2,2,2},
     {1,1,1,1,1,1,0,1,1,0,1,2,2,2,2,1,0,1,1,0,1,1,1,1,1,1,},
     {0,0,0,0,0,0,0,0,0,0,1,2,4,2,2,1,0,0,0,0,0,0,0,0,0,0,},
     {1,1,1,1,1,1,0,1,1,0,1,2,2,2,2,1,0,1,1,0,1,1,1,1,1,1,},
     {2,2,2,2,2,1,0,1,1,0,1,1,1,1,1,1,0,1,1,0,1,2,2,2,2,2},
-    {2,2,2,2,2,1,0,1,1,3,0,0,0,0,0,0,3,1,1,0,1,2,2,2,2,2,},
+    {2,2,2,2,2,1,0,0,0,3,0,0,0,0,0,0,3,0,0,0,1,2,2,2,2,2,},
     {2,2,2,2,2,1,0,1,1,1,1,0,1,1,0,1,1,1,1,0,1,2,2,2,2,2},
     {1,1,1,1,1,1,0,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,1,1,1},
-    {1,0,0,0,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,0,0,0,1,},
+    {1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,},
     {1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,},
     {1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
@@ -53,9 +53,11 @@ void Board::draw(sf::RenderWindow& window) {
     sf::RectangleShape box(sf::Vector2f(TILE_SIZE, TILE_SIZE));
     box.setFillColor(sf::Color::Transparent);
 
-    sf::RectangleShape ghostShape(sf::Vector2f(TILE_SIZE, TILE_SIZE));
-    ghostShape.setFillColor(sf::Color::Red);
-
+    sf::CircleShape dotShapePoint(TILE_SIZE / 4.f);
+    dotShapePoint.setOrigin(sf::Vector2f(-5,-5));
+    dotShapePoint.setFillColor(sf::Color::White);
+ 
+  
 
     for (int y = 0; y < HEIGHT; ++y) {
         for (int x = 0; x < WIDTH; ++x) {
@@ -72,11 +74,11 @@ void Board::draw(sf::RenderWindow& window) {
                 window.draw(box);
             }
             else if (level[y][x] == 3) {
-                ghostShape.setPosition(sf::Vector2f(x * TILE_SIZE, y * TILE_SIZE));
-                window.draw(ghostShape);
+                dotShapePoint.setPosition(sf::Vector2f(x * TILE_SIZE, y * TILE_SIZE));
+                window.draw(dotShapePoint);
             }
             else if (level[y][x] == 4) {
-                ghostShape.setPosition(sf::Vector2f(x * TILE_SIZE, y * TILE_SIZE));
+                dotShapePoint.setPosition(sf::Vector2f(x * TILE_SIZE, y * TILE_SIZE));
             }
         }
 
@@ -86,12 +88,10 @@ void Board::draw(sf::RenderWindow& window) {
 
 
 bool Board::isWall(int x, int y) const {
-	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT) {
-		return false;
-	}
-    //std::cout << "sciana" << std::endl;
-	return level[y][x] == 1;
-	
+    if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT) {
+        return true; //  TO JEST ŒCIANA!
+    }
+    return level[y][x] == 1;
 }
 bool Board::isCherry(int x, int y) {
     if (level[y][x] == 3) {

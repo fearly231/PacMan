@@ -59,7 +59,7 @@ int main() {
         return -1;
     }
 
-   YellowGuy pacman(1, 1, pacManTexture);
+   YellowGuy pacman(12, 5, pacManTexture);
    RedGhost redGhost(13, 13, redGhostTexture, fearedTexture);
    BlueGhost blueGhost(12, 12, blueGhostTexture, fearedTexture);
    OrangeGhost orangeGhost(11, 11, orangeGhostTexture, fearedTexture);
@@ -116,6 +116,7 @@ int main() {
             }
             
 		}
+        window.setFramerateLimit(60);
         window.clear();
         board.draw(window);
         redGhost.draw(window);
