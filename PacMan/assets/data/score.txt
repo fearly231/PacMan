@@ -1,0 +1,5 @@
+Nick: Test michaˆa  | Score: 1006 | Time: 2.39s
+Nick: eloe leo | Score: 880 | Time: 2.72s
+Nick: maciej | Score: 1083 | Time: 2.21s
+Nick:  | Score: 596 | Time: 4.02s
+Nick: awdaw | Score: 684 | Time: 3.50s

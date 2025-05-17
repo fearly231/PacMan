@@ -50,7 +50,7 @@ void YellowGuy::collectPoint(Board& board)  {
     
 		if (board.isPoint(gridPos.x, gridPos.y) == true) {
 			counter++;
-			std::cout << counter << std::endl;
+			//std::cout << counter << std::endl;
            
 		}
         if (board.isCherry(gridPos.x, gridPos.y) == true) {
