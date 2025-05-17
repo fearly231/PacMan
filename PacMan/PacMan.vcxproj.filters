@@ -13,60 +13,66 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\include">
+      <UniqueIdentifier>{efd51f0b-bb8c-4fb1-a40a-87b3caef418c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\src">
+      <UniqueIdentifier>{932c5d0e-959a-4d7b-aff3-4a16844ba2bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PacMan.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Board.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="YellowGuy.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Ghost.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="RedGhost.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="BlueGhost.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="OrangeGhost.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="PinkGhost.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
+    <ClInclude Include="include\Board.h">
+      <Filter>Pliki nagłówkowe\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Character.h">
+      <Filter>Pliki nagłówkowe\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Ghost.h">
+      <Filter>Pliki nagłówkowe\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OrangeGhost.h">
+      <Filter>Pliki nagłówkowe\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PinkGhost.h">
+      <Filter>Pliki nagłówkowe\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\YellowGuy.h">
+      <Filter>Pliki nagłówkowe\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BlueGhost.h">
+      <Filter>Pliki nagłówkowe\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RedGhost.h">
+      <Filter>Pliki nagłówkowe\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Board.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="YellowGuy.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Ghost.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="RedGhost.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="BlueGhost.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="OrangeGhost.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="PinkGhost.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
+    <ClCompile Include="src\BlueGhost.cpp">
+      <Filter>Pliki źródłowe\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Board.cpp">
+      <Filter>Pliki źródłowe\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Character.cpp">
+      <Filter>Pliki źródłowe\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ghost.cpp">
+      <Filter>Pliki źródłowe\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OrangeGhost.cpp">
+      <Filter>Pliki źródłowe\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PacMan.cpp">
+      <Filter>Pliki źródłowe\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PinkGhost.cpp">
+      <Filter>Pliki źródłowe\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RedGhost.cpp">
+      <Filter>Pliki źródłowe\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YellowGuy.cpp">
+      <Filter>Pliki źródłowe\src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

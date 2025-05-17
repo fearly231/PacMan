@@ -105,7 +105,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>E:\Studia\biblioteki\SFML-3.0.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Studia\biblioteki\SFML-3.0.0\include;%(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,7 +123,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>E:\Studia\biblioteki\SFML-3.0.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Studia\biblioteki\SFML-3.0.0\include;%(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,25 +135,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BlueGhost.cpp" />
-    <ClCompile Include="Board.cpp" />
-    <ClCompile Include="Character.cpp" />
-    <ClCompile Include="Ghost.cpp" />
-    <ClCompile Include="OrangeGhost.cpp" />
-    <ClCompile Include="PacMan.cpp" />
-    <ClCompile Include="PinkGhost.cpp" />
-    <ClCompile Include="RedGhost.cpp" />
-    <ClCompile Include="YellowGuy.cpp" />
+    <ClInclude Include="include\BlueGhost.h" />
+    <ClInclude Include="include\Board.h" />
+    <ClInclude Include="include\Character.h" />
+    <ClInclude Include="include\Ghost.h" />
+    <ClInclude Include="include\OrangeGhost.h" />
+    <ClInclude Include="include\PinkGhost.h" />
+    <ClInclude Include="include\RedGhost.h" />
+    <ClInclude Include="include\YellowGuy.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BlueGhost.h" />
-    <ClInclude Include="Board.h" />
-    <ClInclude Include="Character.h" />
-    <ClInclude Include="Ghost.h" />
-    <ClInclude Include="OrangeGhost.h" />
-    <ClInclude Include="PinkGhost.h" />
-    <ClInclude Include="RedGhost.h" />
-    <ClInclude Include="YellowGuy.h" />
+    <ClCompile Include="src\BlueGhost.cpp" />
+    <ClCompile Include="src\Board.cpp" />
+    <ClCompile Include="src\Character.cpp" />
+    <ClCompile Include="src\Ghost.cpp" />
+    <ClCompile Include="src\OrangeGhost.cpp" />
+    <ClCompile Include="src\PacMan.cpp" />
+    <ClCompile Include="src\PinkGhost.cpp" />
+    <ClCompile Include="src\RedGhost.cpp" />
+    <ClCompile Include="src\YellowGuy.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

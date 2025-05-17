@@ -27,12 +27,12 @@ int main() {
     sf::Clock clock2;
 
     sf::Texture pacManTexture, redGhostTexture, blueGhostTexture, orangeGhostTexture, pinkGhostTexture, fearedTexture;
-    if (!pacManTexture.loadFromFile("PacMan32.png") ||
-        !redGhostTexture.loadFromFile("redghost.png") ||
-        !fearedTexture.loadFromFile("feared.png") ||
-        !blueGhostTexture.loadFromFile("blueghost.png") ||
-        !orangeGhostTexture.loadFromFile("orangeghost.png") ||
-        !pinkGhostTexture.loadFromFile("pinkghost.png")) {
+    if (!pacManTexture.loadFromFile("assets/images/PacMan32.png") ||
+        !redGhostTexture.loadFromFile("assets/images/redghost.png") ||
+        !fearedTexture.loadFromFile("assets/images/feared.png") ||
+        !blueGhostTexture.loadFromFile("assets/images/blueghost.png") ||
+        !orangeGhostTexture.loadFromFile("assets/images/orangeghost.png") ||
+        !pinkGhostTexture.loadFromFile("assets/images/pinkghost.png")) {
         std::cerr << "Could not load textures!" << std::endl;
         return -1;
     }
@@ -88,7 +88,7 @@ int main() {
 
             // Wyświetlenie ekranu zwycięstwa
             sf::RenderWindow winnerScreen(sf::VideoMode({ 800, 600 }), "You Win!", sf::Style::Close | sf::Style::Titlebar);
-            sf::Font font("arial.ttf");
+            sf::Font font("assets/fonts/arial.ttf");
 
          
             sf::Text title(font);
@@ -123,7 +123,7 @@ int main() {
             choise1.setFillColor(sf::Color::Magenta);
             choise1.setPosition({ 10.f, 550.f });
 
-            std::ifstream file("score.txt");
+            std::ifstream file("assets/data/score.txt");
 
             while (winnerScreen.isOpen()) {
                 while (std::optional<sf::Event> event = winnerScreen.pollEvent()) {

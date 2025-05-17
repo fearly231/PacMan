@@ -1,9 +1,9 @@
 #include "YellowGuy.h"
 #include "Board.h"
+#include "Character.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
-#include "Character.h"
 YellowGuy::YellowGuy(int startX, int startY, sf::Texture& texture): Character(startX, startY, 100.f)  
 {
     gridPos = { startX, startY };
