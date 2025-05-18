@@ -21,7 +21,7 @@ int main() {
 
     sf::RenderWindow window(sf::VideoMode({ Board::WIDTH * Board::TILE_SIZE, Board::HEIGHT * Board::TILE_SIZE }), "Pac-Man");
     Board board;
-    int totalPoint = 12;// board.countTotalPoints();
+    int totalPoint = board.countTotalPoints();
 
     sf::Clock clock;
     sf::Clock clock2;
@@ -37,6 +37,8 @@ int main() {
         return -1;
     }
 
+    sf::Font font("assets/fonts/arial.ttf");
+    std::filesystem::path path ="assets/data/score.txt";
     YellowGuy pacman(12, 5, pacManTexture);
     RedGhost redGhost(13, 13, redGhostTexture, fearedTexture);
     BlueGhost blueGhost(12, 12, blueGhostTexture, fearedTexture);
@@ -60,19 +62,112 @@ int main() {
         pacman.update(board, deltaTime);
         redGhost.update(board, deltaTime, pacman.getGridPosition());
         blueGhost.update(board, deltaTime, pacman.getGridPosition(), pacmanDir, blinkyPos);
-        orangeGhost.update(board, deltaTime, pacman.getGridPosition(), pacmanDir);
         pinkGhost.update(board, deltaTime, pacman.getGridPosition(), pacmanDir);
+		orangeGhost.update(board, deltaTime, pacman.getGridPosition(), pacmanDir);
         board.updateCherry(deltaTime);
 
+        int score = static_cast<int>(pacman.counter * 1000) / (deltaTime + 5);
+
+		if (pacman.getGridPosition() == redGhost.getGridPosition() && !redGhost.isFeared(board) or (pacman.getGridPosition() ==  blueGhost.getGridPosition() && !blueGhost.isFeared(board)) or (pacman.getGridPosition() == pinkGhost.getGridPosition() && !pinkGhost.isFeared(board)) or (pacman.getGridPosition() == orangeGhost.getGridPosition() && !orangeGhost.isFeared(board))) {
+			std::cout << "KONIEC GRY, PRZEGRALES" << std::endl;
+            gameEnded = true;
+			window.close();
+            try {
+                std::ofstream file(path, std::ios::app);
+                if (file.is_open()) {
+                    file << "Nick: " << nick
+                        << " | Score: " << score
+                        << " | Time: " << std::fixed << std::setprecision(2) << time << "s\n";
+
+                    file.close();
+
+                }
+            }
+            catch (const std::exception& e) {
+                std::cerr << "Błąd przy zapisie wyniku: " << e.what() << std::endl;
+            }
+			sf::RenderWindow gameOverScreen(sf::VideoMode({ 800, 600 }), "Game Over", sf::Style::Close | sf::Style::Titlebar);
+            while (gameOverScreen.isOpen()) {
+                    sf::Text title(font);
+                    title.setString("Koniec Gry, Przegrales!");
+                    title.setCharacterSize(60);
+                    title.setFillColor(sf::Color::Red);
+                    title.setStyle(sf::Text::Bold);
+                    title.setPosition(sf::Vector2f(800.f / 2.f - 300.f, 80.f));
+
+                    sf::Text scoreText(font);
+                    scoreText.setString("Twój wynik to: " + std::to_string(score));
+                    scoreText.setCharacterSize(40);
+                    scoreText.setFillColor(sf::Color::White);
+                    scoreText.setPosition(sf::Vector2f(800.f / 2.f - 200.f, 210.f));
+
+
+
+                    sf::Text nickText(font);
+                    nickText.setString("Gracz: " + nick);
+                    nickText.setCharacterSize(40);
+                    nickText.setFillColor(sf::Color::Cyan);
+                    nickText.setPosition({ 800.f / 2.f - 200.f, 250.f });
+
+                    sf::Text choise(font);
+                    choise.setCharacterSize(20);
+                    choise.setString("Nacisnij ESC aby zakonczyc gre lub Enter aby zaczac od nowa");
+                    choise.setPosition({ 10,10 });
+                    choise.setFillColor(sf::Color::Green);
+
+                    sf::Text choise1(font);
+                    choise1.setString("Wyswietl wyniki: nacisnij W");
+                    choise1.setFillColor(sf::Color::Magenta);
+                    choise1.setPosition({ 10.f, 550.f });
+                while (std::optional<sf::Event> event = gameOverScreen.pollEvent()) {
+                    if (event->is<sf::Event::Closed>()) {
+                        gameOverScreen.close();
+                    }
+
+
+                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter)) {
+                        gameOverScreen.close();
+                        main();
+
+                    }
+                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
+                        std::ifstream file(path);
+                        if (file.is_open()) {
+                            std::string line;
+                            while (std::getline(file, line)) {
+                                std::cout << line << std::endl;
+                            }
+                            file.close();
+                           
+                        }
+                    }
+					
+                        
+                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
+                        gameOverScreen.close();
+
+                    }
+                    
+                    
+                }
+                gameOverScreen.clear();
+                gameOverScreen.draw(title);
+                gameOverScreen.draw(scoreText);
+                gameOverScreen.draw(nickText);
+                gameOverScreen.draw(choise);
+                gameOverScreen.draw(choise1);
+                gameOverScreen.display();
+            }
+		}
         if (pacman.counter == totalPoint && !gameEnded) {
             gameEnded = true;
             window.close();
-            int score = static_cast<int>(pacman.counter / time * 200);
+           
             //float timeElapsed = clock.getElapsedTime().asSeconds();
 
             // Zapis do pliku
             try {
-                std::ofstream file("score.txt", std::ios::app);
+                std::ofstream file(path, std::ios::app);
                 if (file.is_open()) {
                     file << "Nick: " << nick
                         << " | Score: " << score
@@ -88,7 +183,6 @@ int main() {
 
             // Wyświetlenie ekranu zwycięstwa
             sf::RenderWindow winnerScreen(sf::VideoMode({ 800, 600 }), "You Win!", sf::Style::Close | sf::Style::Titlebar);
-            sf::Font font("assets/fonts/arial.ttf");
 
          
             sf::Text title(font);
@@ -123,10 +217,11 @@ int main() {
             choise1.setFillColor(sf::Color::Magenta);
             choise1.setPosition({ 10.f, 550.f });
 
-            std::ifstream file("assets/data/score.txt");
 
             while (winnerScreen.isOpen()) {
                 while (std::optional<sf::Event> event = winnerScreen.pollEvent()) {
+              
+                      
                         if (event->is<sf::Event::Closed>()) {
                             winnerScreen.close();
                         }
@@ -137,8 +232,8 @@ int main() {
                             main();
 
                         }
-                        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
-
+                        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)){
+                            std::ifstream file(path);
                             if (file.is_open()) {
                                 std::string line;
                                 while (std::getline(file, line)) {
@@ -146,6 +241,8 @@ int main() {
                                 }
                                 file.close();
                             }
+							
+						
                         }
                         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
                             winnerScreen.close();

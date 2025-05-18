@@ -39,6 +39,7 @@ void RedGhost::update(Board& board, float deltaTime, const sf::Vector2i& pacmanP
         }
         if (pacmanPos == gridPos and isFeared(board) == false) {
             std::cout << "KONIEC GRY, PRZEGRALES";
+           
         }
         
     }
