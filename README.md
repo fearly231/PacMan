@@ -7,7 +7,7 @@ Ten projekt to prosta implementacja klasycznego Pac-Mana stworzona w języku **C
 ##  Wymagania
 
 - C++17 lub nowszy
-- [SFML 2.5.1+](https://www.sfml-dev.org/download.php) (zainstalowane i skonfigurowane w projekcie)
+- [SFML 3.0.0+](https://www.sfml-dev.org/download) (zainstalowane i skonfigurowane w projekcie)
 - Kompilator zgodny z CMake lub Makefile (np. g++, MSVC)
 
 ---
