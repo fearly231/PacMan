@@ -22,13 +22,21 @@ cd build
 cmake ..
 make
 ./PacMan
-Zasady gry
-Gracz porusza się Pac-Manem (YellowGuy) po planszy.
-Celem jest zebranie wszystkich punktów (.) znajdujących się na mapie.
-Czerwony duch (RedGhost) goni Pac-Mana.
-Jeśli Pac-Man zbierze specjalny punkt (np. wisienkę), duch staje się "przestraszony" i zmienia kolor na niebieski.
-Jeśli duch dotknie Pac-Mana, a nie jest przestraszony – gra się kończy.
+```
+#### Zasady gry
+- Gracz porusza się Pac-Manem (YellowGuy) po planszy.
+- Celem jest zebranie wszystkich punktów (.) znajdujących się na mapie.
+- Czerwony duch (RedGhost) goni Pac-Mana.
+- Jeśli Pac-Man zbierze specjalny punkt (np. wisienkę), duch staje się "przestraszony" i zmienia kolor na niebieski.
+- Jeśli duch dotknie Pac-Mana, a nie jest przestraszony – gra się kończy.
 
+##### 🎮 Sterowanie
+
+- `⬅`, `⬆`, `⬇`, `⮕` – poruszanie się Pac-Mana
+- Zbieraj wszystkie punkty, by wygrać!
+- Uważaj na ducha – jeśli nie jest przerażony, przegrywasz przy kontakcie.
+
+ 
 
 
 
