@@ -24,10 +24,10 @@ make
 ./PacMan
 ```
 ## Zasady gry
-- Gracz porusza się Pac-Manem (YellowGuy) po planszy.
+- Gracz porusza się Pac-Manem po planszy.
 - Celem jest zebranie wszystkich punktów (.) znajdujących się na mapie.
-- Czerwony duch (RedGhost) goni Pac-Mana.
-- Jeśli Pac-Man zbierze specjalny punkt (np. wisienkę), duch staje się "przestraszony" i zmienia kolor na niebieski.
+- Duchy gonią Pac-Mana.
+- Jeśli Pac-Man zbierze specjalny punkt, duchy stają się "przestraszone" i zmieniają kolor na niebieski.
 - Jeśli duch dotknie Pac-Mana, a nie jest przestraszony – gra się kończy.
 
 ## 🎮 Sterowanie
