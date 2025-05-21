@@ -19,9 +19,12 @@ BlueGhost::BlueGhost(int startX, int startY, sf::Texture& normalTexture, sf::Tex
 }
 
 void BlueGhost::update(Board& board, float deltaTime, const sf::Vector2i& pacmanPos, const sf::Vector2i& pacmanDir, const sf::Vector2i& blinkyPos) {
+   
+   
+    
     sf::Vector2f targetPixel(gridPos.x * Board::TILE_SIZE + Board::TILE_SIZE / 2,
         gridPos.y * Board::TILE_SIZE + Board::TILE_SIZE / 2);
-
+   
     if (std::abs(pixelPos.x - targetPixel.x) < 2 && std::abs(pixelPos.y - targetPixel.y) < 2) {
         pixelPos = targetPixel;
 
@@ -35,16 +38,21 @@ void BlueGhost::update(Board& board, float deltaTime, const sf::Vector2i& pacman
         if (pacmanPos == gridPos && !isFeared(board)) {
             std::cout << "KONIEC GRY, PRZEGRA£EŒ!" << std::endl;
         }
+       
     }
 
     if (pacmanPos == gridPos && isFeared(board)) {
         std::cout << "Zjad³eœ BlueGhosta" << std::endl;
+        eated.openFromFile("assets/music/pacman_eatghost.ogg");
+        eated.play();
         gridPos.x = Board::WIDTH / 2 - 1;
         gridPos.y = Board::HEIGHT / 2 - 1;
 
         pixelPos = sf::Vector2f(gridPos.x * Board::TILE_SIZE + Board::TILE_SIZE / 2,
             gridPos.y * Board::TILE_SIZE + Board::TILE_SIZE / 2);
-
+		comingBack.openFromFile("assets/music/eatedghost.ogg");
+        comingBack.setVolume(30);
+        comingBack.play();
         sprite.setPosition(pixelPos);
         currentDir = { 0, 0 };
     }
@@ -52,7 +60,9 @@ void BlueGhost::update(Board& board, float deltaTime, const sf::Vector2i& pacman
     sf::Vector2f movement(currentDir.x * speed * deltaTime, currentDir.y * speed * deltaTime);
     pixelPos += movement;
     sprite.setPosition(pixelPos);
-
+    
+	
+    
     if (gridPos.x <= 0) {
         gridPos.x = Board::WIDTH - 2;
         pixelPos.x = gridPos.x * Board::TILE_SIZE + 2 + Board::TILE_SIZE / 2;
@@ -71,6 +81,8 @@ std::vector<sf::Vector2i> BlueGhost::getPathTo(Board& board, sf::Vector2i start,
 
     // Tryb "FEARED" – Inky porusza siê najdalej od Pacmana
     if (isFeared(board)) {
+       
+
         speed = 50.f;
         sprite = sf::Sprite(fearedTexture);
         sprite.setTextureRect(sf::IntRect({ 0, 0 }, { frameSize, frameHeight }));
@@ -166,3 +178,4 @@ void BlueGhost::draw(sf::RenderWindow& window) {
 bool BlueGhost::isFeared(Board& board) {
     return board.isCherryActive();
 }
+

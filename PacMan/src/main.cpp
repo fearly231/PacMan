@@ -1,4 +1,7 @@
 ﻿#include <SFML/Graphics.hpp>
+#include <stdlib.h> 
+#include <SFML/Audio.hpp>
+
 #include "Board.h"
 #include "YellowGuy.h"
 #include "Character.h"
@@ -25,7 +28,8 @@ int main() {
 
     sf::Clock clock;
     sf::Clock clock2;
-
+    sf::Clock fearClock;
+   
     sf::Texture pacManTexture, redGhostTexture, blueGhostTexture, orangeGhostTexture, pinkGhostTexture, fearedTexture;
     if (!pacManTexture.loadFromFile("assets/images/PacMan32.png") ||
         !redGhostTexture.loadFromFile("assets/images/redghost.png") ||
@@ -36,7 +40,7 @@ int main() {
         std::cerr << "Could not load textures!" << std::endl;
         return -1;
     }
-
+	float fearedTime = fearClock.getElapsedTime().asSeconds();
     sf::Font font("assets/fonts/arial.ttf");
     std::filesystem::path path ="assets/data/score.txt";
     YellowGuy pacman(12, 5, pacManTexture);
@@ -44,20 +48,65 @@ int main() {
     BlueGhost blueGhost(12, 12, blueGhostTexture, fearedTexture);
     OrangeGhost orangeGhost(11, 11, orangeGhostTexture, fearedTexture);
     PinkGhost pinkGhost(13, 12, pinkGhostTexture, fearedTexture);
+    sf::Music sprutMove;
+   
+  
+    
+    sprutMove.openFromFile("assets/music/sprutmove-timestrech.ogg");
+    sprutMove.setLooping(true);
+    sprutMove.play();
+    bool initialized = true;
+    
+
+  
+  
+    bool musicPaused = false;
+
+   
+  
+	sf::Music music;
+    sf::Music deathSound;
+    //music.openFromFile("assets/music/Here_comes_pacman_EARRAPE_EDITED.ogg");
+    music.openFromFile("assets/music/pacmanog.ogg");
+    music.setVolume(20);
+    music.play();
+	deathSound.openFromFile("assets/music/pacman_death.wav");
+	deathSound.setVolume(20);
+
+
 
     sf::Vector2i pacmanDir = pacman.getDirPosition();
     sf::Vector2i blinkyPos = redGhost.getRedGhostPos();
     clock2.restart();
+    fearClock.restart();
     while (window.isOpen()) {
         while (std::optional<sf::Event> event = window.pollEvent()) {
             if (event->is<sf::Event::Closed>()) {
                 window.close();
             }
         }
+        if (blueGhost.isFeared(board)) {
+            if (!musicPaused) {
+                sprutMove.pause();
+                fearClock.restart();
+                musicPaused = true;
+            }
+            else if (fearClock.getElapsedTime().asSeconds() > 7.f) {
+                sprutMove.play();
+                musicPaused = false;
+            }
+        }
+        else if (musicPaused) {
+            // awaryjne wznowienie jesli fear minie wczesniej
+            sprutMove.play();
+            musicPaused = false;
+        }
 
+        
         float deltaTime = clock.restart().asSeconds();
 		float time = clock2.getElapsedTime().asSeconds();
-		std::cout << "Elapsed time: " << time << " seconds" << std::endl;
+       
+		//std::cout << "Elapsed time: " << time << " seconds" << std::endl;
         pacman.handleInput();
         pacman.update(board, deltaTime);
         redGhost.update(board, deltaTime, pacman.getGridPosition());
@@ -69,9 +118,13 @@ int main() {
         int score = static_cast<int>(pacman.counter * 1000) / (deltaTime + 5);
 
 		if (pacman.getGridPosition() == redGhost.getGridPosition() && !redGhost.isFeared(board) or (pacman.getGridPosition() ==  blueGhost.getGridPosition() && !blueGhost.isFeared(board)) or (pacman.getGridPosition() == pinkGhost.getGridPosition() && !pinkGhost.isFeared(board)) or (pacman.getGridPosition() == orangeGhost.getGridPosition() && !orangeGhost.isFeared(board))) {
-			std::cout << "KONIEC GRY, PRZEGRALES" << std::endl;
+            deathSound.play();
+            std::cout << "KONIEC GRY, PRZEGRALES" << std::endl;
             gameEnded = true;
 			window.close();
+            music.stop();
+			sprutMove.stop();
+
             try {
                 std::ofstream file(path, std::ios::app);
                 if (file.is_open()) {
@@ -87,6 +140,7 @@ int main() {
                 std::cerr << "Błąd przy zapisie wyniku: " << e.what() << std::endl;
             }
 			sf::RenderWindow gameOverScreen(sf::VideoMode({ 800, 600 }), "Game Over", sf::Style::Close | sf::Style::Titlebar);
+           
             while (gameOverScreen.isOpen()) {
                     sf::Text title(font);
                     title.setString("Koniec Gry, Przegrales!");
@@ -132,19 +186,22 @@ int main() {
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
                         std::ifstream file(path);
+                        
                         if (file.is_open()) {
                             std::string line;
                             while (std::getline(file, line)) {
                                 std::cout << line << std::endl;
+
                             }
                             file.close();
-                           
+                            
                         }
                     }
 					
                         
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
                         gameOverScreen.close();
+                         
 
                     }
                     

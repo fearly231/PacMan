@@ -46,6 +46,8 @@ void RedGhost::update(Board& board, float deltaTime, const sf::Vector2i& pacmanP
     if (pacmanPos == gridPos && isFeared(board)) {
        // std::cout << "Zjad³eœ RedGhosta\n";
         //counter = counter + 100;
+		eated.openFromFile("assets/music/pacman_eatghost.wav");
+        eated.play();
         gridPos.x = Board::WIDTH / 2;
         gridPos.y = Board::HEIGHT / 2;
 
@@ -53,7 +55,9 @@ void RedGhost::update(Board& board, float deltaTime, const sf::Vector2i& pacmanP
             gridPos.x * Board::TILE_SIZE + Board::TILE_SIZE / 2,
             gridPos.y * Board::TILE_SIZE + Board::TILE_SIZE / 2
         );
-
+        comingBack.openFromFile("assets/music/eatedghost.ogg");
+        comingBack.setVolume(30);
+        comingBack.play();
         sprite.setPosition(pixelPos);
         currentDir = { 0, 0 };
     }

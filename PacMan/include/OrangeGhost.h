@@ -1,5 +1,6 @@
 #pragma once
 #include "Ghost.h"
+#include <SFML/Audio.hpp>
 class OrangeGhost : public Ghost {
 public:
 
@@ -14,6 +15,7 @@ public:
 private:
 	sf::Texture& normalTexture;
 	sf::Texture& fearedTexture;
-
+	sf::Music eated;
+	sf::Music comingBack;
 };
 

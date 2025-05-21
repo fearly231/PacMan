@@ -1,5 +1,6 @@
 #pragma once
 #include "Character.h"
+#include <SFML/Audio.hpp>
 class Ghost : public Character {
 public:
     struct Vec2iLess {
@@ -13,6 +14,7 @@ public:
     virtual void draw(sf::RenderWindow& window) override;
     virtual bool isFeared(Board& board);
     virtual ~Ghost() {}
+    
 
 protected:
     const int frameCount = 4;

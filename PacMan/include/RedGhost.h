@@ -3,7 +3,7 @@
 
 
 
-
+#include <SFML/Audio.hpp>
 class RedGhost : public Ghost {
 public:
 
@@ -19,7 +19,9 @@ public:
 private:
 	sf::Texture& normalTexture;
 	sf::Texture& fearedTexture;
-	
+	sf::Music eated;
+	sf::Music comingBack;
+
 };
 
 

@@ -11,12 +11,17 @@ public:
 	std::vector<sf::Vector2i> getPathTo(Board& board, sf::Vector2i start, sf::Vector2i pacmanPos, sf::Vector2i pacmanDir, sf::Vector2i blinkyPos);
 	void draw(sf::RenderWindow& window) override;
 	bool isFeared(Board& board) override;
+	
 	//void setRedGhostReference(RedGhost& red);
 	~BlueGhost() {};
 
 private:
 	sf::Texture& normalTexture;
 	sf::Texture& fearedTexture;
-
+	sf::Music eated;
+	sf::Music sprutMove;
+	sf::Music comingBack;
+	bool wasFeared;
+	float fearTime = 7.0f;
 };
 

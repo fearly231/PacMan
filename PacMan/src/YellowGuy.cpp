@@ -4,12 +4,13 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
-YellowGuy::YellowGuy(int startX, int startY, sf::Texture& texture): Character(startX, startY, 100.f)  
+#include <SFML/Audio.hpp>
+
+YellowGuy::YellowGuy(int startX, int startY, sf::Texture& texture) : Character(startX, startY, speed)
 {
     gridPos = { startX, startY };
     currentDir = { 0, 0 };
     nextDir = { 0, 0 };
-
     pixelPos = sf::Vector2f( gridPos.x * Board::TILE_SIZE + Board::TILE_SIZE / 2, gridPos.y * Board::TILE_SIZE + Board::TILE_SIZE / 2 );
     sprite = sf::Sprite(texture);
     sprite.setTextureRect(sf::IntRect({ 32, 0 }, {frameSize, frameSize}));
@@ -17,6 +18,7 @@ YellowGuy::YellowGuy(int startX, int startY, sf::Texture& texture): Character(st
     sprite.setPosition(pixelPos);
 	sprite.setScale(sf::Vector2f(0.7f, 0.7f));
    // std::cout << "PixelPos: " << pixelPos.x << ", " << pixelPos.y << std::endl;
+    
 }
 
 void YellowGuy::handleInput() {
@@ -47,14 +49,24 @@ bool YellowGuy::canMove(const Board& board, sf::Vector2i dir) const {
 }
 
 void YellowGuy::collectPoint(Board& board)  {
-    
+	
 		if (board.isPoint(gridPos.x, gridPos.y) == true) {
 			counter++;
+   
+            music.openFromFile("assets/music/PacManWakaWaka.ogg");
+			music.setVolume(20);
+            music.play();
+		
+            
+            
 			//std::cout << counter << std::endl;
            
 		}
+      
         if (board.isCherry(gridPos.x, gridPos.y) == true) {
-            board.activateCherry(7.f); // np. 7 sekund strachu
+            board.activateCherry(7.f); // 7 sekund strachu
+            scared.openFromFile("assets/music/scared.ogg");
+            scared.play();
             
         }
         

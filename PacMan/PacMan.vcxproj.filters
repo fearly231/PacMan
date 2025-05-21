@@ -62,7 +62,7 @@
     <ClCompile Include="src\OrangeGhost.cpp">
       <Filter>Pliki źródłowe\src</Filter>
     </ClCompile>
-    <ClCompile Include="src\PacMan.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Pliki źródłowe\src</Filter>
     </ClCompile>
     <ClCompile Include="src\PinkGhost.cpp">

@@ -124,6 +124,7 @@ int Board::countTotalPoints() {
 void Board::activateCherry(float duration) {
     cherryActive = true;
     cherryTimer = duration;
+
 }
 
 void Board::updateCherry(float deltaTime) {

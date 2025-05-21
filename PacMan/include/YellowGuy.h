@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Board.h"
 #include "Character.h"
 class YellowGuy : public Character {
@@ -14,6 +15,9 @@ public:
     }
     int counter = 0;
     sf::Vector2i getDirPosition();
+ 
+
+
 private:
    
     sf::Vector2f pixelPos;
@@ -22,7 +26,8 @@ private:
     bool canMove(const Board& board, sf::Vector2i dir) const;
     void updateAnimation(float deltaTime);
    
-
+    sf::Music music;
+    sf::Music scared;
 
     const int frameCount = 3;
     const int frameSize = 32;

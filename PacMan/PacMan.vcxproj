@@ -131,7 +131,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>E:\Studia\biblioteki\SFML-3.0.0\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -150,7 +150,7 @@
     <ClCompile Include="src\Character.cpp" />
     <ClCompile Include="src\Ghost.cpp" />
     <ClCompile Include="src\OrangeGhost.cpp" />
-    <ClCompile Include="src\PacMan.cpp" />
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\PinkGhost.cpp" />
     <ClCompile Include="src\RedGhost.cpp" />
     <ClCompile Include="src\YellowGuy.cpp" />
